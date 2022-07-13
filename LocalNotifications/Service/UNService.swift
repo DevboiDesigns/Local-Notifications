@@ -35,12 +35,43 @@ class UNService: NSObject {
             self.configure()
         }
     }
-    
+            
     func configure() {
         unCenter.delegate = self
+        // Action & Categories
+        setupActionAndCategory()
     }
     
-    func getAttachment(for id: NotificationAttachmentId) -> UNNotificationAttachment? {
+    func setupActionAndCategory() {
+        // Actions
+        // options: what will happen when clicked
+        let timerAction = UNNotificationAction(identifier: NotificationActionID.timer.rawValue,
+                                               title: "Run timer logic",
+                                               options: [.authenticationRequired])
+        
+        let dateAction = UNNotificationAction(identifier: NotificationActionID.date.rawValue,
+                                               title: "Run date logic",
+                                               options: [.destructive])
+        
+        let locationAction = UNNotificationAction(identifier: NotificationActionID.location.rawValue,
+                                               title: "Run location logic",
+                                               options: [.foreground])
+        
+        // Categories
+        let timerCategory = UNNotificationCategory(identifier: NotificationCategory.timer.rawValue,
+                                                   actions: [timerAction],
+                                                   intentIdentifiers: [])
+        let dateCategory = UNNotificationCategory(identifier: NotificationCategory.date.rawValue,
+                                                  actions: [dateAction],
+                                                  intentIdentifiers: [])
+        let locationCategory = UNNotificationCategory(identifier: NotificationCategory.location.rawValue,
+                                                      actions: [locationAction],
+                                                      intentIdentifiers: [])
+        
+        unCenter.setNotificationCategories([timerCategory, dateCategory, locationCategory])
+    }
+    
+    func getAttachment(for id: NotificationAttachmentID) -> UNNotificationAttachment? {
         var imageName: String
         switch id {
         case .timer:
@@ -71,6 +102,8 @@ class UNService: NSObject {
         content.body = "Your timer is all done. YAY!"
         content.sound = .default
         content.badge = 1
+        // Action & Category
+        content.categoryIdentifier = NotificationCategory.timer.rawValue
         
         // Attachment Image
         if let attachment = getAttachment(for: .timer) {
@@ -98,6 +131,8 @@ class UNService: NSObject {
         content.body = "It is now the future"
         content.sound = .default
         content.badge = 1
+        // Action & Category
+        content.categoryIdentifier = NotificationCategory.date.rawValue
         
         // Attachment Image
         if let attachment = getAttachment(for: .date) {
@@ -120,6 +155,8 @@ class UNService: NSObject {
         content.body = "You have returned"
         content.sound = .default
         content.badge = 1
+        // Action & Category
+        content.categoryIdentifier = NotificationCategory.location.rawValue
         
         // Attachment Image
         if let attachment = getAttachment(for: .location) {
