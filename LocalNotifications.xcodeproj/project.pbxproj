@@ -13,6 +13,7 @@
 		0C2B3BA92878E76B00ED5632 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2B3BA82878E76B00ED5632 /* Preview Assets.xcassets */; };
 		0C86CF83287F38D600349B7B /* UNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C86CF82287F38D600349B7B /* UNService.swift */; };
 		0C86CF85287F4CE700349B7B /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C86CF84287F4CE700349B7B /* AlertService.swift */; };
+		0C86CF87287F529200349B7B /* CLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C86CF86287F529200349B7B /* CLService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		0C2B3BA82878E76B00ED5632 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0C86CF82287F38D600349B7B /* UNService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNService.swift; sourceTree = "<group>"; };
 		0C86CF84287F4CE700349B7B /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		0C86CF86287F529200349B7B /* CLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,9 +57,9 @@
 		0C2B3BA02878E76900ED5632 /* LocalNotifications */ = {
 			isa = PBXGroup;
 			children = (
-				0C86CF81287F38C500349B7B /* Service */,
 				0C2B3BA12878E76900ED5632 /* LocalNotificationsApp.swift */,
 				0C2B3BA32878E76900ED5632 /* ContentView.swift */,
+				0C86CF81287F38C500349B7B /* Service */,
 				0C2B3BA52878E76B00ED5632 /* Assets.xcassets */,
 				0C2B3BA72878E76B00ED5632 /* Preview Content */,
 			);
@@ -77,6 +79,7 @@
 			children = (
 				0C86CF82287F38D600349B7B /* UNService.swift */,
 				0C86CF84287F4CE700349B7B /* AlertService.swift */,
+				0C86CF86287F529200349B7B /* CLService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C86CF87287F529200349B7B /* CLService.swift in Sources */,
 				0C86CF83287F38D600349B7B /* UNService.swift in Sources */,
 				0C2B3BA42878E76900ED5632 /* ContentView.swift in Sources */,
 				0C86CF85287F4CE700349B7B /* AlertService.swift in Sources */,
@@ -286,6 +290,8 @@
 				DEVELOPMENT_TEAM = B9GKQ3WWHT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationUsageDescription = "We need to kow where you are";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to know where you are ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -315,6 +321,8 @@
 				DEVELOPMENT_TEAM = B9GKQ3WWHT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationUsageDescription = "We need to kow where you are";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to know where you are ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -36,7 +36,8 @@ struct ContentView: View {
                     Button {
                         alertService.locationAlert()
                         self.showAlert.toggle()
-                        UNService.shared.locationRequest()
+                        CLService.shared.updateLocation()
+                        
                     } label: {
                         createButton(imgName: "location.circle")
                     }
@@ -60,6 +61,7 @@ struct ContentView: View {
         .onAppear {
             // Best to not add too much to AppDelegate (slows down opening of app)
             UNService.shared.authorize()
+            CLService.shared.authorize()
             // will trigger everytime clock lands on Zero
             components.second = 0
 //            components.weekday = 1 // Sunday 1 : Monday 2
