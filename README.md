@@ -100,7 +100,7 @@ extension UNService: UNUserNotificationCenterDelegate {
     }
 ```
 
-### Posting
+## Posting
 
 ```swift
 func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
@@ -113,7 +113,7 @@ func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegi
     }
 ```
 
-### Observing
+## Observing
 
 - SwiftUI uses publisher & onRecieve
 
@@ -132,7 +132,7 @@ let pub = NotificationCenter.default.publisher(for: NSNotification.Name("interna
         })
 ```
 
-### Setting Attachments
+## Setting Attachments
 
 ```swift
   func getAttachment(for id: NotificationAttachmentId) -> UNNotificationAttachment? {
