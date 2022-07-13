@@ -40,6 +40,30 @@ class UNService: NSObject {
         unCenter.delegate = self
     }
     
+    func getAttachment(for id: NotificationAttachmentId) -> UNNotificationAttachment? {
+        var imageName: String
+        switch id {
+        case .timer:
+            imageName = "TimeAlert"
+            print("timer")
+        case .date:
+            imageName = "DateAlert"
+            print("date")
+        case .location:
+            imageName = "LocationAlert"
+            print("location")
+        }
+        
+        
+        guard let url = Bundle.main.url(forResource: imageName, withExtension: "png") else { return nil }
+        do {
+            let attachment = try UNNotificationAttachment(identifier: id.rawValue, url: url)
+            return attachment
+        } catch {
+            return nil
+        }
+    }
+    
     //MARK: - Timer notification
     func timerRequest(with interval: TimeInterval) {
         let content = UNMutableNotificationContent()
@@ -47,6 +71,11 @@ class UNService: NSObject {
         content.body = "Your timer is all done. YAY!"
         content.sound = .default
         content.badge = 1
+        
+        // Attachment Image
+        if let attachment = getAttachment(for: .timer) {
+            content.attachments = [attachment]
+        }
         
         // ----------------------------------------------------------- repeat: if using repeat make sure interval is greater than 60s
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
@@ -70,6 +99,11 @@ class UNService: NSObject {
         content.sound = .default
         content.badge = 1
         
+        // Attachment Image
+        if let attachment = getAttachment(for: .date) {
+            content.attachments = [attachment]
+        }
+        
         // ----------- type of Trigger
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         
@@ -81,6 +115,22 @@ class UNService: NSObject {
     
     //MARK: - Location notification
     func locationRequest() {
+        let content = UNMutableNotificationContent()
+        content.title = "Location Content"
+        content.body = "You have returned"
+        content.sound = .default
+        content.badge = 1
+        
+        // Attachment Image
+        if let attachment = getAttachment(for: .location) {
+            content.attachments = [attachment]
+        }
+        
+        // UNRELIABLE
+//        let trigger = UNLocationNotificationTrigger
+        
+        let request = UNNotificationRequest(identifier: "userNotification.location", content: content, trigger: nil)
+        unCenter.add(request)
         
     }
 }

@@ -12,9 +12,6 @@ class AlertService: ObservableObject {
     var title: String = ""
     var message: String = "Ready to go"
     
-  //  private init() {}
-    
-    
     func timerAlert() {
         self.title = "Timer Notification Set"
     }

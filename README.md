@@ -76,7 +76,7 @@ extension UNService: UNUserNotificationCenterDelegate {
  }
 ```
 
-### Notififcation request config
+## Notififcation request config
 
 - content (what your sending)
 - trigger
@@ -98,4 +98,74 @@ extension UNService: UNUserNotificationCenterDelegate {
         unCenter.add(request)
 
     }
+```
+
+### Posting
+
+```swift
+func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("DID Enter REGION via CoreLocatoin")
+        let object: [Any] = [region]
+
+  // POST
+
+        NotificationCenter.default.post(name: NSNotification.Name("internalNotification.enteredRegion"), object: object)
+    }
+```
+
+### Observing
+
+- SwiftUI uses publisher & onRecieve
+
+**declare top level**
+
+```swift
+let pub = NotificationCenter.default.publisher(for: NSNotification.Name("internalNotification.enteredRegion"))
+```
+
+- objc method to be called on ViewModel
+- can be added to any view
+
+```swift
+ .onReceive(pub, perform: { output in
+            vm.didEnterRegion()
+        })
+```
+
+### Setting Attachments
+
+```swift
+  func getAttachment(for id: NotificationAttachmentId) -> UNNotificationAttachment? {
+        var imageName: String
+        switch id {
+        case .timer:
+            imageName = "TimerAlert"
+            print("timer")
+        case .date:
+            imageName = "DateAlert"
+            print("date")
+        case .location:
+            imageName = "LocationAlert"
+            print("location")
+        }
+
+
+        guard let url = Bundle.main.url(forResource: imageName, withExtension: "png") else { return nil }
+        do {
+            let attachment = try UNNotificationAttachment(identifier: id.rawValue, url: url, options: nil)
+            return attachment
+        } catch {
+            return nil
+        }
+    }
+```
+
+- set on `let content = UNMutableNotificationContent()`
+
+```swift
+  // Attachment Image
+        if let attachment = getAttachment(for: .timer) {
+            content.attachments = [attachment]
+        }
+
 ```

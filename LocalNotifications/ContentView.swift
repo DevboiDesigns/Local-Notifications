@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @ObservedObject var alertService = AlertService()
+    @ObservedObject var vm = ViewModel()
     
     @State private var components = DateComponents()
     
     @State private var showAlert: Bool = false
+    
+    @State private var object: [Any] = []
+    
+    //MARK: - SwiftUI
+    let pub = NotificationCenter.default.publisher(for: NSNotification.Name("internalNotification.enteredRegion"))
     
     var body: some View {
         ZStack {
@@ -58,6 +65,10 @@ struct ContentView: View {
         .alert(isPresented: $showAlert) {
             Alert(title: Text(alertService.title), message: Text(alertService.message), dismissButton: .cancel())
         }
+        .onReceive(pub, perform: { output in
+            //MARK: - Notification Observer for SwiftUI
+            vm.didEnterRegion()
+        })
         .onAppear {
             // Best to not add too much to AppDelegate (slows down opening of app)
             UNService.shared.authorize()
@@ -70,7 +81,6 @@ struct ContentView: View {
     
     private func createButton(imgName: String) -> some View {
         VStack {
-            
             Image(systemName: imgName)
                 .resizable()
                 .scaledToFit()
