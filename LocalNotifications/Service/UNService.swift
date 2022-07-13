@@ -39,6 +39,49 @@ class UNService: NSObject {
     func configure() {
         unCenter.delegate = self
     }
+    
+    //MARK: - Timer notification
+    func timerRequest(with interval: TimeInterval) {
+        let content = UNMutableNotificationContent()
+        content.title = "Timer finished"
+        content.body = "Your timer is all done. YAY!"
+        content.sound = .default
+        content.badge = 1
+        
+        // ----------------------------------------------------------- repeat: if using repeat make sure interval is greater than 60s
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "userNotification.timer", content: content, trigger: trigger)
+        
+        unCenter.add(request) { error in
+            if let error = error {
+                print("ERROR adding request: \(error.localizedDescription)")
+            } else {
+                print("Added Timer REQUEST")
+            }
+        }
+    }
+    
+    //MARK: - Date notification
+    func dateRequest(with components: DateComponents) {
+        let content = UNMutableNotificationContent()
+        content.title = "Date trigger"
+        content.body = "It is now the future"
+        content.sound = .default
+        content.badge = 1
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "userNotification.date", content: content, trigger: trigger)
+        
+        unCenter.add(request)
+        
+    }
+    
+    //MARK: - Location notification
+    func locationRequest() {
+        
+    }
 }
 
 //MARK: - User Notification Delegate methods

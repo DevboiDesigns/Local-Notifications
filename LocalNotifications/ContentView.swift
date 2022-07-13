@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var components = DateComponents()
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [.black, .white], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -17,7 +20,7 @@ struct ContentView: View {
                 
                 //MARK: - Timer
                 Button {
-                    // Action
+                    UNService.shared.timerRequest(with: 5)
                 } label: {
                     createButton(imgName: "timer")
                 }
@@ -34,7 +37,7 @@ struct ContentView: View {
                     
                     //MARK: - Date
                     Button {
-                        // Action
+                        UNService.shared.dateRequest(with: components)
                     } label: {
                         createButton(imgName: "calendar")
                     }
@@ -45,6 +48,9 @@ struct ContentView: View {
         .onAppear {
             // Best to not add too much to AppDelegate (slows down opening of app)
             UNService.shared.authorize()
+            // will trigger everytime clock lands on Zero
+            components.second = 0
+//            components.weekday = 1 // Sunday 1 : Monday 2
         }
     }
     

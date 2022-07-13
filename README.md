@@ -75,3 +75,9 @@ extension UNService: UNUserNotificationCenterDelegate {
      UNService.shared.authorize()
  }
 ```
+
+### Notififcation request config
+
+- content (what your sending)
+- trigger
+- request (put in queue in UNCenter)
