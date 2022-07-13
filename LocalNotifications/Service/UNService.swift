@@ -70,6 +70,7 @@ class UNService: NSObject {
         content.sound = .default
         content.badge = 1
         
+        // ----------- type of Trigger
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         
         let request = UNNotificationRequest(identifier: "userNotification.date", content: content, trigger: trigger)

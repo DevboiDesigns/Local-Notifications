@@ -81,3 +81,21 @@ extension UNService: UNUserNotificationCenterDelegate {
 - content (what your sending)
 - trigger
 - request (put in queue in UNCenter)
+
+```swift
+    func dateRequest(with components: DateComponents) {
+        let content = UNMutableNotificationContent()
+        content.title = "Date trigger"
+        content.body = "It is now the future"
+        content.sound = .default
+        content.badge = 1
+
+        // ----------- type of Trigger
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+
+        let request = UNNotificationRequest(identifier: "userNotification.date", content: content, trigger: trigger)
+
+        unCenter.add(request)
+
+    }
+```
