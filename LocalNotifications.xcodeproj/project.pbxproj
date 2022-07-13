@@ -11,6 +11,7 @@
 		0C2B3BA42878E76900ED5632 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B3BA32878E76900ED5632 /* ContentView.swift */; };
 		0C2B3BA62878E76B00ED5632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2B3BA52878E76B00ED5632 /* Assets.xcassets */; };
 		0C2B3BA92878E76B00ED5632 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2B3BA82878E76B00ED5632 /* Preview Assets.xcassets */; };
+		0C86CF83287F38D600349B7B /* UNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C86CF82287F38D600349B7B /* UNService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		0C2B3BA32878E76900ED5632 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0C2B3BA52878E76B00ED5632 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C2B3BA82878E76B00ED5632 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0C86CF82287F38D600349B7B /* UNService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		0C2B3BA02878E76900ED5632 /* LocalNotifications */ = {
 			isa = PBXGroup;
 			children = (
+				0C86CF81287F38C500349B7B /* Service */,
 				0C2B3BA12878E76900ED5632 /* LocalNotificationsApp.swift */,
 				0C2B3BA32878E76900ED5632 /* ContentView.swift */,
 				0C2B3BA52878E76B00ED5632 /* Assets.xcassets */,
@@ -65,6 +68,14 @@
 				0C2B3BA82878E76B00ED5632 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0C86CF81287F38C500349B7B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0C86CF82287F38D600349B7B /* UNService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C86CF83287F38D600349B7B /* UNService.swift in Sources */,
 				0C2B3BA42878E76900ED5632 /* ContentView.swift in Sources */,
 				0C2B3BA22878E76900ED5632 /* LocalNotificationsApp.swift in Sources */,
 			);

@@ -42,7 +42,10 @@ struct ContentView: View {
                 
             }
         }
-       
+        .onAppear {
+            // Best to not add too much to AppDelegate (slows down opening of app)
+            UNService.shared.authorize()
+        }
     }
     
     private func createButton(imgName: String) -> some View {
