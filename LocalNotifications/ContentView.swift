@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var alertService = AlertService()
     
     @State private var components = DateComponents()
+    
+    @State private var showAlert: Bool = false
     
     var body: some View {
         ZStack {
@@ -20,23 +23,29 @@ struct ContentView: View {
                 
                 //MARK: - Timer
                 Button {
+                    alertService.timerAlert()
+                    self.showAlert.toggle()
                     UNService.shared.timerRequest(with: 5)
                 } label: {
                     createButton(imgName: "timer")
                 }
                 
                
-
                 HStack(alignment: .center, spacing: 38) {
                     //MARK: - Location
                     Button {
-                        // Action
+                        alertService.locationAlert()
+                        self.showAlert.toggle()
+                        UNService.shared.locationRequest()
                     } label: {
                         createButton(imgName: "location.circle")
                     }
                     
+                    
                     //MARK: - Date
                     Button {
+                        alertService.dateAlert()
+                        self.showAlert.toggle()
                         UNService.shared.dateRequest(with: components)
                     } label: {
                         createButton(imgName: "calendar")
@@ -44,6 +53,9 @@ struct ContentView: View {
                 }
                 
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text(alertService.title), message: Text(alertService.message), dismissButton: .cancel())
         }
         .onAppear {
             // Best to not add too much to AppDelegate (slows down opening of app)
