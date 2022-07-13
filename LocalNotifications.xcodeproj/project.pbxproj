@@ -71,12 +71,12 @@
 		0C2B3BA02878E76900ED5632 /* LocalNotifications */ = {
 			isa = PBXGroup;
 			children = (
-				0C86CF8E287F64F100349B7B /* imgs */,
 				0C2B3BA12878E76900ED5632 /* LocalNotificationsApp.swift */,
 				0C2B3BA32878E76900ED5632 /* ContentView.swift */,
 				0C86CF89287F5AD400349B7B /* ViewModel.swift */,
 				0C86CF8B287F638600349B7B /* Model */,
 				0C86CF81287F38C500349B7B /* Service */,
+				0C86CF8E287F64F100349B7B /* imgs */,
 				0C2B3BA52878E76B00ED5632 /* Assets.xcassets */,
 				0C2B3BA72878E76B00ED5632 /* Preview Content */,
 			);

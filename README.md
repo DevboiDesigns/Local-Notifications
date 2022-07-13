@@ -226,3 +226,47 @@ func setupActionAndCategory() {
         // Action & Category
         content.categoryIdentifier = NotificationCategory.timer.rawValue
 ```
+
+- In Delegate Method
+
+```swift
+ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("UN did recieve response:\n \(response)")
+
+        //MARK: - Handling Actions
+        if let action = NotificationActionID(rawValue: response.actionIdentifier) {
+            NotificationCenter.default.post(name: NSNotification.Name("internalNotification.handleAction"), object: action)
+        }
+
+        completionHandler()
+    }
+```
+
+- View
+- add publisher
+
+```swift
+let actionPub = NotificationCenter.default.publisher(for: Notification.Name("internalNotification.handleAction"))
+
+
+.onReceive(actionPub, perform: { output in
+            vm.handleAction(output)
+        })
+```
+
+- method on view model
+
+```swift
+ @objc
+    func handleAction(_ sender: Notification) {
+        guard let action = sender.object as? NotificationActionID else { return }
+        switch action {
+        case .timer:
+            print("Timer Action Ran")
+        case .date:
+            print("Date Action Ran")
+        case .location:
+            print("Location Action Ran")
+        }
+    }
+```

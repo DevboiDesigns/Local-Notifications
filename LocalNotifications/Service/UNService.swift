@@ -178,6 +178,12 @@ extension UNService: UNUserNotificationCenterDelegate {
     // user taps on notificaton and opens app
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print("UN did recieve response:\n \(response)")
+        
+        //MARK: - Handling Actions
+        if let action = NotificationActionID(rawValue: response.actionIdentifier) {
+            NotificationCenter.default.post(name: NSNotification.Name("internalNotification.handleAction"), object: action)
+        }
+        
         completionHandler()
     }
     

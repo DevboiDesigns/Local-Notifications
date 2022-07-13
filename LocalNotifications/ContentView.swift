@@ -20,6 +20,7 @@ struct ContentView: View {
     
     //MARK: - SwiftUI
     let pub = NotificationCenter.default.publisher(for: NSNotification.Name("internalNotification.enteredRegion"))
+    let actionPub = NotificationCenter.default.publisher(for: Notification.Name("internalNotification.handleAction"))
     
     var body: some View {
         ZStack {
@@ -65,6 +66,9 @@ struct ContentView: View {
         .alert(isPresented: $showAlert) {
             Alert(title: Text(alertService.title), message: Text(alertService.message), dismissButton: .cancel())
         }
+        .onReceive(actionPub, perform: { output in
+            vm.handleAction(output)
+        })
         .onReceive(pub, perform: { output in
             //MARK: - Notification Observer for SwiftUI
             vm.didEnterRegion()
